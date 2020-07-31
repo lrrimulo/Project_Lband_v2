@@ -1,0 +1,20 @@
+* eta Tau -- Be Star
+Other object types:	Be* (), * (*,AG,...), ** (**,BDS,...), IR (IRAS,IRC,...), *iC (Cl*,Cl), *iN (VDB), Em* (EM*), PM* (Ref), UV (CEL), X (1E)
+ICRS coord. (ep=J2000) :	03 47 29.0765529 +24 06 18.488347 (Optical) [ 0.39 0.25 90 ] A 2007A&A...474..653V
+FK4 coord. (ep=B1950 eq=1950) :	03 44 30.4223001 +23 57 07.541785 [ 0.39 0.25 90 ]
+Gal coord. (ep=J2000) :	166.6682509629 -23.4552176355 [ 0.39 0.25 90 ]
+Proper motions mas/yr :	19.34 -43.67 [0.39 0.33 90] A 2007A&A...474..653V
+Radial velocity / Redshift / cz :	V(km/s) 5.40 [1.2] / z(~) 0.000018 [0.000004] / cz 5.40 [1.20] 
+   B 2006AstL...32..759G
+Parallaxes (mas):	8.09 [0.42] A 2007A&A...474..653V
+Spectral type:	B7III C ~
+Fluxes (9) :	
+U 2.44 [~] C 2002yCat.2237....0D
+B 2.78 [~] C 2002yCat.2237....0D
+V 2.87 [~] C 2002yCat.2237....0D
+R 2.84 [~] C 2002yCat.2237....0D
+I 2.88 [~] C 2002yCat.2237....0D
+G 2.7730 [0.0052] C 2018yCat.1345....0G
+J 2.94 [~] C 2002yCat.2237....0D
+H 2.97 [~] C 2002yCat.2237....0D
+K 2.94 [~] C 2002yCat.2237....0D

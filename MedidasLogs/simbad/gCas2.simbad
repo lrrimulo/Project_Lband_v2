@@ -1,0 +1,20 @@
+* gam Cas -- Be Star
+Other object types:	Be* (), * (Ref,*,...), X (3A,AT,...), ** (**,ADS,...), IR (IRAS,IRC,...), Em* (EM*,[KW97]), V* (V*,AAVSO), UV (EUVE,TD1), gam (INTREF), *iN (VDB)
+ICRS coord. (ep=J2000) :	00 56 42.5317 +60 43 00.265 [ 4.25 3.32 137 ] A 1997A&A...323L..49P
+FK4 coord. (ep=B1950 eq=1950) :	00 53 40.3389 +60 26 47.397 [ 4.25 3.32 137 ]
+Gal coord. (ep=J2000) :	123.5768709 -02.1484089 [ 4.25 3.32 137 ]
+Proper motions mas/yr :	25.65 -3.82 [0.48 0.37 139] A 1997A&A...323L..49P
+Radial velocity / Redshift / cz :	V(km/s) -6.8 [0.9] / z(~) -0.000023 [0.000003] / cz -6.80 [0.90] 
+   E 1953GCRV..C......0W
+Parallaxes (mas):	5.32 [0.56] A 1997A&A...323L..49P
+Spectral type:	B0.5IVpe C 2011ARep...55...31S
+Fluxes (8) :	
+U 1.18 [~] C 2002yCat.2237....0D
+B 2.29 [~] C 2002yCat.2237....0D
+V 2.39 [~] C 2002yCat.2237....0D
+R 2.32 [~] C 2002yCat.2237....0D
+I 2.40 [~] C 2002yCat.2237....0D
+J 2.36 [~] C 2002yCat.2237....0D
+H 2.22 [~] C 2002yCat.2237....0D
+K 2.11 [~] C 2002yCat.2237....0D
+

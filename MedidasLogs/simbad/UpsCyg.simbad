@@ -1,0 +1,34 @@
+
+* ups Cyg -- Be Star
+Other object types:	* (*,AG,...), ** (ADS,CCDM,...), UV (CEL,EUVE,...), Em* (EM*,Hen), V* (V*,AAVSO), Be* (Ref), IR (2MASS)
+Syntax of coordinates is : "ra dec (wtype) [error ellipse] quality bibcode" :
+ra dec : right ascension and declination (unit and frame defined according to your Output Options)
+Grey values are increasing the original precision due to the computation of frame transformations
+(wtype) : wavelength class for the origin of the coordinates (Rad, mm, IR, Optical, UV, Xray, Gam)
+[error ellipse] : coordinates error major axis, minor axis (in mas at defined epoch in the original catalogue),
+position angle (in degrees North celestial pole to East)
+quality : flag of quality
+E ≥ 10"
+D : 1-10" (and some old data)
+C : 0.1-1"
+B : 0.01-0.1" + 2MASS, Tyc
+A : VLBI, Hipparcos
+bibcode : bibcode of the coordinates reference
+ICRS coord. (ep=J2000) :	21 17 55.0870156081 +34 53 48.769974820 (Optical) [ 0.2634 0.3849 90 ] A 2018yCat.1345....0G
+FK4 coord. (ep=B1950 eq=1950) :	21 15 51.6061191926 +34 41 10.005914471 [ 0.2634 0.3849 90 ]
+Gal coord. (ep=J2000) :	080.9766873319500 -10.0526098879699 [ 0.2634 0.3849 90 ]
+Proper motions mas/yr :	4.822 -2.079 [0.483 0.584 90] A 2018yCat.1345....0G
+Radial velocity / Redshift / cz :	V(km/s) -0.70 [1.3] / z(~) -0.000002 [0.000004] / cz -0.70 [1.30] 
+   B 2006AstL...32..759G
+Parallaxes (mas):	5.3490 [0.4777] A 2018yCat.1345....0G
+Spectral type:	B2Vne C ~
+Fluxes (9) :	
+U 3.50 [~] C 2002yCat.2237....0D
+B 4.32 [~] C 2002yCat.2237....0D
+V 4.42 [~] C 2002yCat.2237....0D
+R 4.37 [~] C 2002yCat.2237....0D
+I 4.45 [~] C 2002yCat.2237....0D
+G 4.0377 [0.0055] C 2018yCat.1345....0G
+J 4.40 [~] C 2002yCat.2237....0D
+H 4.34 [~] C 2002yCat.2237....0D
+K 4.15 [~] C 2002yCat.2237....0D

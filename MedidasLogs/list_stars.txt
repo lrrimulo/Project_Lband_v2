@@ -1,0 +1,24 @@
+betPsc
+Bk Cam
+10 Cas
+28 Cyg
+60 Cyg
+gamma Cas
+omi And
+omi Cas
+16 Peg
+25 Peg
+phi And
+17 Tau
+23 Tau
+25 Tau
+28 Tau
+ups Cyg
+V568 Cyg
+V777 Cas
+V2113 Cyg
+V2119 Cyg
+V2120 Cyg
+V2123 Cyg
+V2162 Cyg
+12 Vul

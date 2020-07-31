@@ -1,0 +1,20 @@
+### This is the first table of Granada et al. 2010AJ....139.1983G
+###
+### Columns 0, 1: Star name
+### Column 2: HD name
+### Columns 3, 4: Spectral type
+### Column 5: Mennickent's type
+### Columns 6, 7, 8: vsini [km/s]
+### Column 9: source of vsini
+### Column 10: Is it binary?
+### Column 11: Date of measurement
+### 
+BK Cam	20336	B2.5 Ve	I	328 pm 21	(a)	Yes	2008/11/25
+28 Tau	23862	B8 IVev	II	286 pm 16	(a)	Yes	2006/08/20
+88 Her	162732	Bp she	I	310 pm 16	(a)	Yes	2006/08/21
+66 Oph	164284	B2 Ve	II	280 pm 17	(a)	Yes	2008/08/25
+V923 Aql	183656	Bp she	II	270 pm 20	(a)	Yes	2006/09/17
+28 Cyg	191610	B2.5 Ve II	300 pm 20	(a)	None	2008/08/25
+EW Lac	217050	B3 IVshe	II	340 pm 22	(a)	?	2006/08/20
+EW Lac	217050	B3 IVshe	II	340 pm 22	(a)	?	2008/09/09
+18 And	222304	B9 V	III?	188 pm nan	(b)	None	2008/09/09

@@ -1,0 +1,33 @@
+* omi Cas -- Be Star
+Other object types:	* (*,AG,...), ** (ADS,CCDM,...), SB* (Ref,SBC9), V* (V*,AAVSO), Be* (Ref), Em* (EM*), IR (2MASS), UV (TD1)
+Syntax of coordinates is : "ra dec (wtype) [error ellipse] quality bibcode" :
+ra dec : right ascension and declination (unit and frame defined according to your Output Options)
+Grey values are increasing the original precision due to the computation of frame transformations
+(wtype) : wavelength class for the origin of the coordinates (Rad, mm, IR, Optical, UV, Xray, Gam)
+[error ellipse] : coordinates error major axis, minor axis (in mas at defined epoch in the original catalogue),
+position angle (in degrees North celestial pole to East)
+quality : flag of quality
+E ≥ 10"
+D : 1-10" (and some old data)
+C : 0.1-1"
+B : 0.01-0.1" + 2MASS, Tyc
+A : VLBI, Hipparcos
+bibcode : bibcode of the coordinates reference
+ICRS coord. (ep=J2000) :	00 44 43.5186650 +48 17 03.713573 (Optical) [ 0.24 0.16 90 ] A 2007A&A...474..653V
+FK4 coord. (ep=B1950 eq=1950) :	00 41 55.6454889 +48 00 39.902401 [ 0.24 0.16 90 ]
+Gal coord. (ep=J2000) :	121.7781898421 -14.5723473363 [ 0.24 0.16 90 ]
+Proper motions mas/yr :	18.84 -7.18 [0.26 0.20 90] A 2007A&A...474..653V
+Radial velocity / Redshift / cz :	V(km/s) -16.9 [5] / z(~) -0.000056 [0.000017] / cz -16.90 [5.00] 
+   C 1979IAUS...30...57E
+Parallaxes (mas):	4.64 [0.38] A 2007A&A...474..653V
+Spectral type:	B5IIIe C ~
+Fluxes (9) :	
+U 3.91 [~] C 2002yCat.2237....0D
+B 4.44 [~] C 2002yCat.2237....0D
+V 4.50 [~] C 2002yCat.2237....0D
+R 4.45 [~] C 2002yCat.2237....0D
+I 4.50 [~] C 2002yCat.2237....0D
+G 4.3566 [0.0061] C 2018yCat.1345....0G
+J 4.62 [~] C 2002yCat.2237....0D
+H 4.68 [~] C 2002yCat.2237....0D
+K 4.68 [~] C 2002yCat.2237....0D

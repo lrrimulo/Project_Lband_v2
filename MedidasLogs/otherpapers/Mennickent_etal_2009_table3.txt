@@ -1,0 +1,22 @@
+### This is the thrid table of Mennickent et al. 2009PASP..121..125M
+###
+### Columns 0, 1: Star name
+### Column 2: flux Bralpha [erg/cm2 s] (err = 10%)
+### Column 3: flux Pfgamma [erg/cm2 s] (err = 10%)
+### Column 4: flux Hu14 [erg/cm2 s] (err = 10%)
+### Column 5: -EW Bralpha [Angstroms] (err = 10%)
+### Column 6: -EW Pfgamma [Angstroms] (err = 10%)
+### Column 7: -EW Hu14 [Angstroms] (err = 10%)
+### Column 8: FWHM Bralpha [km/s] (err = 40 km/s)
+### Column 9: FWHM Pfgamma [km/s] (err = 40 km/s)
+### Column 10: FWHM Hu14 [km/s] (err = 40 km/s)
+### Column 11: lambda0 [microns]
+###
+mu Cen	5.46E-11	2.32E-11	1.03E-11	82.8	25.8	16	512	370	447	>=4.0
+V767 Cen	9.73E-12	1.17E-11	9.25E-12	28.3	21.5	24.7	None	None	None	3.65
+V817 Cen	1.62E-11	1.26E-11	1.23E-11	24.9	17.2	22.7	277	399	357	3.65
+OZ Nor	1.28E-11	9.50E-12	9.38E-12	35	16.5	23.3	238	288	267	3.75
+V341 Sge	3.41E-12	1.47E-12	6.80E-13	57	17.7	11.6	136	145	128	>=4.0
+V4024 Sgr	1.99E-11	2.23E-11	1.84E-11	23.3	15.9	19.8	356	327	325	3.75
+V1150 Tau	5.91E-12	5.28E-12	4.04E-12	72.6	44.2	40	350	556	567	3.75
+V395 Vul	1.06E-11	7.88E-12	5.58E-12	24.3	14.3	9.9	538	554	484	>=4.0

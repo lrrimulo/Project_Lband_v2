@@ -1,0 +1,42 @@
+### This is the forth table of Granada et al. 2010AJ....139.1983G
+###
+### Columns 0, 1: indexes of transtion
+### Column 2: lambda [microns]
+### Column 3: FWHM (BK Cam) [km/s] (err = 40 km/s)
+### Column 4: FWHM (28 Tau) [km/s] (err = 40 km/s)
+### Column 5: FWHM (88 Her) [km/s] (err = 40 km/s)
+### Column 6: FWHM (66 Oph) [km/s] (err = 40 km/s)
+### Column 7: FWHM (V923 Aql) [km/s] (err = 40 km/s)
+### Column 8: FWHM (28 Cyg) [km/s] (err = 40 km/s)
+### Column 9: FWHM (EW Lac 2006) [km/s] (err = 40 km/s)
+### Column 10: FWHM (EW Lac 2008) [km/s] (err = 40 km/s)
+### 
+5 4    4.052	633	766	None	551	475	617	640	517
+14 6    4.021	687	None	None	598	419	750	752	538
+15 6    3.908	735	None	None	None	None	855	783	634
+16 6    3.82	712	None	None	None	523	None	935	617
+17 6    3.75	683	None	None	None	None	None	None	479
+8 5    3.741	711	754	518	444	651	830	774	544
+18 6    3.693	661	None	None	None	None	None	591	544
+19 6    3.646	785	None	None	None	None	None	889	562
+20 6    3.607	794	None	None	None	None	None	None	588
+21 6    3.574	704	None	None	None	None	None	632	604
+22 6    3.546	619	None	None	None	None	None	854	582
+23 6    3.522	726	None	None	None	None	None	879	539
+24 6    3.501	601	None	None	None	None	None	None	543
+25 6    3.483	None	None	None	None	None	None	None	469
+9 5    3.297	None	None	None	None	None	None	None	None
+10 5    3.04	624	646	None	None	None	None	None	None
+16 5    2.526	None	None	None	None	None	None	None	521
+17 5    2.495	677	None	None	None	None	None	None	670
+18 5    2.47	727	None	None	None	None	None	None	766
+19 5    2.449	481	None	None	None	None	None	None	659
+20 5    2.431	518	None	None	None	None	None	None	607
+21 5    2.416	633	None	None	None	None	None	None	706
+22 5    2.404	557	None	None	None	None	None	None	597
+23 5    2.393	440	None	None	None	None	None	None	556
+24 5    2.383	498	None	None	None	None	None	None	650
+25 5    2.373	358	None	None	None	None	None	None	433
+27 5    2.359	None	None	None	None	None	None	None	None
+7 4    2.166	579	416	None	None	em	sh	255	410
+8 4    1.94	795	None	None	None	None	None	None	735

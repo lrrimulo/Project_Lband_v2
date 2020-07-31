@@ -1,0 +1,20 @@
+* 28 Tau -- Be Star
+Other object types:	Ir* (), * (*,AG,...), IR (AKARI,IRAS,...), *iC (Cl*,Cl), V* (V*,AAVSO), UV (CEL,TD1), ** (WDS), Be* (Ref), Em* (EM*), X (1E)
+ICRS coord. (ep=J2000) :	03 49 11.2175463444 +24 08 12.172181348 (Optical) [ 0.1899 0.1184 90 ] A 2018yCat.1345....0G
+FK4 coord. (ep=B1950 eq=1950) :	03 46 12.4086208581 +23 59 07.620091154 [ 0.1899 0.1184 90 ]
+Gal coord. (ep=J2000) :	166.9567171550756 -23.1693986071633 [ 0.1899 0.1184 90 ]
+Proper motions mas/yr :	18.07 -47.20 [0.30 0.27 0] A 2007A&A...474..653V
+Radial velocity / Redshift / cz :	V(km/s) 5.10 [0.2] / z(~) 0.000017 [0.000001] / cz 5.10 [0.20] 
+   A 2006AstL...32..759G
+Parallaxes (mas):	7.7229 [0.2039] A 2018yCat.1345....0G
+Spectral type:	B8Vne C 2008PZP.....8....6T
+Fluxes (8) :	
+U 4.73 [~] C 2002yCat.2237....0D
+B 5.01 [~] C 2002yCat.2237....0D
+V 5.09 [~] C 2002yCat.2237....0D
+I 5.08 [~] D 2007ApJS..172..663S
+G 5.1857 [0.0017] C 2018yCat.1345....0G
+J 5.087 [0.037] C 2003yCat.2246....0C
+H 5.067 [0.047] C 2003yCat.2246....0C
+K 4.937 [0.021] C 2003yCat.2246....0C
+

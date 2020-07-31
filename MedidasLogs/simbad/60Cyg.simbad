@@ -1,0 +1,18 @@
+* 60 Cyg -- Be Star
+Other object types:	EB* (), * (*,AG,...), ** (**,ADS,...), Em* (EM*,[KW97]), UV (CEL,TD1), Be* (Ref), V* (V*), IR (2MASS), X (RX)
+ICRS coord. (ep=J2000) :	21 01 10.92841 +46 09 20.7816 (Optical) [ 3.16 2.81 90 ] A 2007A&A...474..653V
+FK4 coord. (ep=B1950 eq=1950) :	20 59 26.06461 +45 57 31.0792 [ 3.16 2.81 90 ]
+Gal coord. (ep=J2000) :	087.15483149 -00.10282923 [ 3.16 2.81 90 ]
+Proper motions mas/yr :	6.98 3.15 [0.32 0.36 0] A 2007A&A...474..653V
+Radial velocity / Redshift / cz :	V(km/s) -11.60 [4.2] / z(~) -0.000039 [0.000014] / cz -11.60 [4.20] 
+   C 2006AstL...32..759G
+Parallaxes (mas):	2.14 [0.37] A 2007A&A...474..653V
+Spectral type:	B1Ve C ~
+Fluxes (6) :	
+U 4.23 [~] D 1982IAUS...98..261J
+B 5.226 [0.014] D 2000A&A...355L..27H
+V 5.432 [0.009] D 2000A&A...355L..27H
+J 5.860 [0.026] C 2003yCat.2246....0C
+H 5.952 [0.029] C 2003yCat.2246....0C
+K 5.993 [0.024] C 2003yCat.2246....0C
+

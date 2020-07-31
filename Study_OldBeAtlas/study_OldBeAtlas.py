@@ -1,0 +1,1081 @@
+"""
+This is an old program I used to make plots of the OldBeatlas grid. 
+This program is not part of the main project anymore.
+"""
+
+
+import numpy as np
+import glob as glob
+import matplotlib.pyplot as plt
+import pyhdust as hdt
+import pyhdust.phc as phc
+import pyhdust.lrr as lrr
+import pyhdust.lrr.roche_singlestar as rss
+import pyhdust.spectools as spt
+
+
+
+### These below are the parameters of the Old BeAtlas. Use them as a 
+### guide in the plotings.
+###
+### npar=['3.0','3.5','4.0','4.5']
+### sigpar=['0.00','0.02','0.05','0.12','0.28','0.68','1.65','4.00']
+### Mpar=['14.60','12.50','10.80','09.60','08.60','07.70','06.40',
+###    '05.50','04.80','04.20','03.80']
+### obpar=['1.10','1.20','1.30','1.40','1.45']
+
+
+fullsed_path = '../OldBeAtlas/fullsed/'
+source_path = '../OldBeAtlas/source/'
+temps_path = '../OldBeAtlas/temperatures/'
+dist_std = 10.
+
+filepars_list=  [
+    ['3.5','0.00','14.60','1.40'],
+
+### Varying Sigma0:
+#    ['3.5','0.02','12.50','1.40'],
+#    ['3.5','0.05','12.50','1.40'],
+#    ['3.5','0.12','12.50','1.40'],
+#    ['3.5','0.28','12.50','1.40'],
+#    ['3.5','0.68','12.50','1.40'],
+#    ['3.5','1.65','12.50','1.40'],
+#    ['3.5','4.00','12.50','1.40']
+
+### Varying n:
+#    ['3.0','1.65','12.50','1.40'],
+#    ['3.5','1.65','12.50','1.40'],
+#    ['4.0','1.65','12.50','1.40'],
+#    ['4.5','1.65','12.50','1.40']
+
+### Varying ob:
+#    ['3.5','1.65','12.50','1.10'],
+#    ['3.5','1.65','12.50','1.20'],
+#    ['3.5','1.65','12.50','1.30'],
+#    ['3.5','1.65','12.50','1.40'],
+#    ['3.5','1.65','12.50','1.45']
+
+### Varying stellar mass:
+#    ['3.5','1.65','14.60','1.40'],
+#    ['3.5','1.65','12.50','1.40'],
+#    ['3.5','1.65','10.80','1.40'],
+#    ['3.5','1.65','09.60','1.40'],
+#    ['3.5','1.65','08.60','1.40'],
+#    ['3.5','1.65','07.70','1.40'],
+#    ['3.5','1.65','06.40','1.40'],
+#    ['3.5','1.65','05.50','1.40'],
+#    ['3.5','1.65','04.80','1.40'],
+#    ['3.5','1.65','04.20','1.40'],
+#    ['3.5','1.65','03.80','1.40']
+
+### Study of L band:
+#    ['7.5','0.05','12.50','1.40'],
+#    ['7.5','0.28','12.50','1.40'],
+#    ['7.5','1.65','12.50','1.40']
+
+### Study of L band part 2:
+#    ['3.6','0.05','12.50','1.40'],
+#    ['3.6','0.28','12.50','1.40'],
+#    ['3.6','1.65','12.50','1.40']
+
+### Study of L band part 3:
+#    ['3.0','0.02','14.60','1.40'],
+#    ['3.0','0.05','14.60','1.40'],
+#    ['3.0','0.12','14.60','1.40'],
+#    ['3.0','0.28','14.60','1.40'],
+#    ['3.0','0.68','14.60','1.40'],
+    ['3.0','1.65','14.60','1.40'],
+#    ['3.0','4.00','14.60','1.40'],
+#    ['3.5','0.02','14.60','1.40'],
+#    ['3.5','0.05','14.60','1.40'],
+#    ['3.5','0.12','07.70','1.40'],
+#    ['3.5','0.28','07.70','1.40'],
+#    ['3.5','0.68','07.70','1.40'],
+    ['3.5','1.65','14.60','1.40'],
+#    ['3.5','4.00','07.70','1.40'],
+#    ['4.0','0.02','14.60','1.40'],
+#    ['4.0','0.05','14.60','1.40'],
+#    ['4.0','0.12','14.60','1.40'],
+#    ['4.0','0.28','14.60','1.40'],
+#    ['4.0','0.68','14.60','1.40'],
+    ['4.0','1.65','14.60','1.40'],
+#    ['4.0','4.00','14.60','1.40'],
+#    ['4.5','0.02','14.60','1.40'],
+#    ['4.5','0.05','14.60','1.40'],
+#    ['4.5','0.12','14.60','1.40'],
+#    ['4.5','0.28','14.60','1.40'],
+#    ['4.5','0.68','14.60','1.40'],
+    ['4.5','1.65','14.60','1.40'],
+#    ['4.5','4.00','14.60','1.40']
+
+#    ['3.5','0.02','04.20','1.40'],
+#    ['3.5','0.05','04.20','1.40'],
+#    ['3.5','0.12','04.20','1.40']
+    ]
+
+
+
+
+
+#########################
+
+files_fullsed=sorted(glob.glob(fullsed_path+'*'))	
+files_source=sorted(glob.glob(source_path+'*'))
+files_temps=sorted(glob.glob(temps_path+'*'))
+
+### Below, the model's parameters are matched with the available 
+### fullsed files. Later, the source and temperature files are matched
+### with these selected fullsed files.
+
+### It is assumed that the names of the fullsed files are of the form:
+### fullsed_mod191_PLn4.0_sig0.05_h072_Rd050.0_Be_M04.80_ob1.10_H0.30_Z0.014_bE_Ell.sed2
+### or
+### fullsed_mod01_PLn3.5_sig0.00_h060_Rd050.0_Be_M03.80_ob1.20_H0.77_Z0.014_bE_Ell.sed2
+files_fullsed_new=[]    ### will receive the names of the fullsed
+                        ### files to be opened.
+for ifpl in xrange(0,len(filepars_list)):
+    for ifile in xrange(0,len(files_fullsed)):
+        if ('PLn{0}_sig{1}_h072_Rd050.0_Be_'\
+    .format(filepars_list[ifpl][0],filepars_list[ifpl][1])+\
+    'M{0}_ob{1}_H0.30_Z0.014_bE_Ell'\
+    .format(filepars_list[ifpl][2],filepars_list[ifpl][3]) in \
+    files_fullsed[ifile]) \
+    or ('PLn{0}_sig{1}_h060_Rd050.0_Be_'\
+    .format(filepars_list[ifpl][0],filepars_list[ifpl][1])+\
+    'M{0}_ob{1}_H0.30_Z0.014_bE_Ell'\
+    .format(filepars_list[ifpl][2],filepars_list[ifpl][3]) in \
+    files_fullsed[ifile]):
+            files_fullsed_new.append(files_fullsed[ifile])            
+
+### It is assumed that the names of the source files are of the form:
+### Be_M03.40_ob1.45_H0.54_Z0.014_bE_Ell.txt
+### (Notice that the it is countained in the name of the fullsed file.)
+files_source_new=[] ### will receive the names of the source
+                    ### files to be opened.
+for iffn in xrange(0,len(files_fullsed_new)):
+    for ifs in xrange(0,len(files_source)):
+        if files_source[ifs].replace(source_path,'').replace('.txt','')\
+                    in files_fullsed_new[iffn]:
+            files_source_new.append(files_source[ifs])
+
+
+### It is assumed that the names of the temperature files are of the form:
+### mod126_PLn3.5_sig0.28_h072_Rd050.0_Be_M09.60_ob1.20_H0.30_Z0.014_bE_Ell30_avg.temp
+### (Notice that the it is countained in the name of the fullsed file.)
+files_temps_new=[]  ### will receive the names of the temperature
+                    ### files to be opened.
+for iffn in xrange(0,len(files_fullsed_new)):
+    achei=0 ### Some fullsed files may not have correspondent temp files,
+            ### like the ones of purely photospherical models. 
+    for ifs in xrange(0,len(files_temps)):
+        if files_temps[ifs].replace(temps_path,'').replace(\
+                '30_avg.temp','')\
+             in files_fullsed_new[iffn]:
+            files_temps_new.append(files_temps[ifs])
+            achei=1
+    if achei == 0:
+        files_temps_new.append('EMPTY')
+
+
+### 
+
+fullsed_contents=[] ### This list will receive the important contents
+                    ### of all the files
+for ifile in xrange(0,len(files_fullsed_new)):
+
+    ### Reading the fullsed, source and temperature files:
+    
+    fullsedtest=files_fullsed_new[ifile]
+    f0=open(fullsedtest,'r')
+    f0linhas=f0.readlines()
+    f0.close()
+
+    sourcetest=files_source_new[ifile]
+    f1=open(sourcetest,'r')
+    f1linhas=f1.readlines()
+    f1.close()    
+
+    tempstest=files_temps_new[ifile]
+    if tempstest != 'EMPTY':
+        ### OBS: This pyhdust procedure will print 
+        ### "'FILE' completely read!"
+        ncr, ncmu, ncphi, nLTE, nNLTE, Rstarz, Raz, betaz, dataz, \
+            pcr, pcmu, pcphi = hdt.readtemp(tempstest)
+        abttemp=[
+                [dataz[0,i,ncmu/2,0]/Rstarz for i in \
+                        xrange(0,len(dataz[0,:,ncmu/2,0]))],
+                [dataz[3,i,ncmu/2,0] for i in \
+                        xrange(0,len(dataz[3,:,ncmu/2,0]))]
+                ]
+    else:
+        abttemp=[
+                [np.nan,np.nan],
+                [np.nan,np.nan]
+                ]
+
+
+    ### Obtaining each element of the 'fullsed_contents' list
+
+    nobs=int(f0linhas[3].split()[1])
+    nlbd=int(f0linhas[3].split()[0])
+    contents=[    
+        fullsedtest,                    ### 0: Name of fullsed file
+        np.zeros(nobs),                 ### 1: will receive the cosi's
+        np.zeros((nobs,nlbd,3)),        ### 2: will receive the SED
+        sourcetest,                     ### 3: Name of source file
+        np.zeros(5),                    ### 4: will receive the 
+                                        ###    parameters of the star 
+                                        ###    (source)
+        tempstest,                      ### 5: Name of temperature file
+        np.zeros((2,len(abttemp[0]))),  ### 6: will receive the temp 
+                                        ###    profile
+        [[],[]]
+        ]
+    contents[1][:] = np.nan
+    contents[2][:] = np.nan
+    contents[4][:] = np.nan
+    contents[6][:] = np.nan
+
+
+    ### Receiving cosi and SED ("1" and "2")
+    for iobs in xrange(0,nobs):
+        mu = float(f0linhas[5+iobs*nlbd].split()[0])
+        contents[1][iobs] = mu
+        for ilbd in xrange(0, nlbd):
+            auxi = f0linhas[5+iobs*nlbd+ilbd].split()
+            contents[2][iobs, ilbd, 0] = float(auxi[2])
+            contents[2][iobs, ilbd, 1] = float(auxi[3])
+            contents[2][iobs, ilbd, 2] = float(auxi[7])
+
+
+    ### Receiving parameters of the star (source) ("4")
+    contents[4][0] = float(f1linhas[3].split()[2]) ### M
+    contents[4][1] = float(f1linhas[4].split()[2]) ### R_pole
+    contents[4][2] = float(f1linhas[5].split()[2]) ### W
+    contents[4][3] = float(f1linhas[6].split()[2]) ### L
+    contents[4][4] = float(f1linhas[7].split()[2]) ### Beta_GD
+    
+    ### Receiving the temperature profile ("6")
+    for i in xrange(0,len(contents[6][0,:])):
+        contents[6][0,i] = abttemp[0][i]
+        contents[6][1,i] = abttemp[1][i]
+        
+
+    fullsed_contents.append(contents)
+
+
+#############################
+
+
+
+
+
+
+
+
+colorvec=[  "purple","blue","green","orange","red","black",\
+            "purple","blue","green","orange","red","black",\
+            "purple","blue","green","orange","red","black",\
+            "purple","blue","green","orange","red","black",\
+            "purple","blue","green","orange","red","black"]
+linestylevec=[  "-","-","-","-","-","-",\
+                "--","--","--","--","--","--",\
+                "-.","-.","-.","-.","-.","-.",\
+                ":",":",":",":",":",":",\
+                "-","-","-","-","-","-"]
+
+
+### PLOTTING SED
+if 1==2:
+    lbc=0.656461; lineprof=False
+
+	### SETTING XLIM
+    #xlim_now=(0.1,50.) ### All
+    #xlim_now=(0.35,1.) ### Visible
+    xlim_now=(3.4,4.1) ### L band
+    #xlim_now=(0.656461-0.0015,0.656461+0.0015) ### Halpha
+    #xlim_now=(0.486271-0.0015,0.486271+0.0015) ### Hbeta
+    #xlim_now=(4.020843-0.0015,4.020843+0.0015) ### Humphrey14
+    
+    
+    lineprof=True; hwidth=1000.
+    lbc=0.656461; xlim_now=(lbc-0.0010,lbc+0.0010) ### Halpha
+    #lbc=0.486271; xlim_now=(lbc-0.0010,lbc+0.0010) ### Hbeta
+    #lbc=0.434169; xlim_now=(lbc-0.0010,lbc+0.0010) ### Hgamma
+    #lbc=0.410289; xlim_now=(lbc-0.0010,lbc+0.0010) ### Hdelta
+    #lbc=2.1661178; xlim_now=(lbc-0.0010,lbc+0.0010) ### Brgamma
+    #
+    #lbc=4.052248; xlim_now=(lbc-0.0010,lbc+0.0010) ### Bralpha
+    #lbc=4.020843; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey14
+    #lbc=3.907525; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey15
+    #lbc=3.819428; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey16
+    #lbc=3.749370; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey17
+    #lbc=3.740536; xlim_now=(lbc-0.0010,lbc+0.0010) ### Pfgamma
+    #lbc=3.692611; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey18
+    #lbc=3.645901; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey19
+    #lbc=3.606946; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey20
+    #lbc=3.574082; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey21
+    #lbc=3.546079; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey22
+    #lbc=3.522003; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey23
+    #lbc=3.501142; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey24
+    #lbc=3.482938; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey25
+    ###lbc=3.466951; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey26
+    ###lbc=3.452831; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey27
+    ###lbc=3.440293; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey28
+    ###lbc=3.429108; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey29
+    ###lbc=3.419084; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey30
+    ###lbc=3.410065; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey31
+    ###lbc=3.401919; xlim_now=(lbc-0.0010,lbc+0.0010) ### Humphrey32
+    
+
+    plt.figure(1,figsize=(8, 12), dpi=100)
+
+    ### Uncomment one of the following loops:
+
+    ### LOOP OVER SELECTED MODELS
+    inu=0 ### 9 for pole-on, 0 for edge-on
+    for icont in xrange(0,len(fullsed_contents)):
+        contents=fullsed_contents[icont]
+        ii=icont
+    ###
+
+    ### LOOP OVER INCLINATIONS
+    #icont=2
+    #contents=fullsed_contents[icont]
+    #for inu in xrange(0,len(contents[1])):
+    #    ii=inu
+    ###
+    
+        ### OBS:
+        ### inu = index of cosi
+        ### icont = index of the model that was read
+
+        if lineprof == True:
+            plt.subplot(211)
+            xlp=contents[2][inu,:,0]
+            ylp=contents[2][inu,:,1]
+                    ### Obs "lineProf": retorna um array (flx) 
+                    ### normalizado e um array x em VELOCIDADES.
+            xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+            plt.plot(xplot, yplot, \
+                color=colorvec[ii], linestyle=linestylevec[ii])
+        else:
+            plt.subplot(311)
+            xplot=contents[2][inu,:,0]
+            yplot=contents[2][inu,:,1]*xplot
+            plt.plot(xplot, yplot, \
+                color=colorvec[ii], linestyle=linestylevec[ii])
+        
+            lnxplot=np.log(xplot)
+            lnyplot=np.log(yplot)
+            alpha_sed=[]
+            for ia in xrange(0,len(lnxplot)):
+                if ia != 0 and ia != len(lnxplot)-1:
+                    alpha_sed.append((lnyplot[ia+1]-lnyplot[ia-1])/\
+                                (lnxplot[ia+1]-lnxplot[ia-1]))
+                if ia == 0:
+                    alpha_sed.append((lnyplot[ia+1]-lnyplot[ia])/\
+                                (lnxplot[ia+1]-lnxplot[ia]))
+                if ia == len(lnxplot)-1:
+                    alpha_sed.append((lnyplot[ia]-lnyplot[ia-1])/\
+                                (lnxplot[ia]-lnxplot[ia-1]))
+            alpha_sed=-np.array(alpha_sed)
+            plt.subplot(613)
+            plt.plot(xplot, alpha_sed, \
+                color=colorvec[ii], linestyle=linestylevec[ii])            
+
+            deriv_sed=[]
+            for ia in xrange(0,len(xplot)):
+                if ia != 0 and ia != len(xplot)-1:
+                    deriv_sed.append((yplot[ia+1]-yplot[ia-1])/\
+                                (xplot[ia+1]-xplot[ia-1]))
+                if ia == 0:
+                    deriv_sed.append((yplot[ia+1]-yplot[ia])/\
+                                (xplot[ia+1]-xplot[ia]))
+                if ia == len(xplot)-1:
+                    deriv_sed.append((yplot[ia]-yplot[ia-1])/\
+                                (xplot[ia]-xplot[ia-1]))            
+            deriv_sed=np.array(deriv_sed)
+            plt.subplot(614)
+            plt.plot(xplot, deriv_sed, \
+                color=colorvec[ii], linestyle=linestylevec[ii])            
+
+        
+        if lineprof == True:
+            plt.subplot(234)
+            #ylp = ylp * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+            #            (dist_std*phc.pc.cgs)**2.*1e-4
+            #print(contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+            #            (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs)
+            vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5 ### Doppler vels 
+                                                        ### in km/s
+            idx = np.where(np.abs(vels) <= hwidth)
+            ### line flux in erg/s cm^2
+            linflux=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+            linflux=linflux * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+            xplotn=[ii]
+            yplotn=[linflux*1e10]
+            plt.scatter(xplotn, yplotn, color=colorvec[ii])
+            plt.plot([0.,float(len(contents[1])-1)], [0.,0.], \
+                        color="black", linestyle=":")
+
+            plt.subplot(235)
+            ew=spt.EWcalc(xplot, yplot, vw=hwidth)
+            ew = ew*lbc/phc.c.cgs*1e9
+            xplotn=[ii]
+            yplotn=[ew]
+            plt.scatter(xplotn, yplotn, color=colorvec[ii])
+            
+            plt.subplot(236)
+            peakseparation=False
+            if peakseparation == True:
+                v1,v2=spt.PScalc(xplot, yplot, vc=0.0, ssize=0.05, \
+                                gaussfit=True)
+                xplotn=[ii]
+                yplotn=[v2-v1]
+                plt.scatter(xplotn, yplotn, color=colorvec[ii])
+        else:
+            plt.subplot(313)
+            xplot=contents[2][inu,:,0]
+            yplot=np.sqrt(contents[2][inu,:,2]**2)
+            plt.plot(xplot, yplot, \
+                color=colorvec[ii], linestyle=linestylevec[ii])
+
+
+    ### Adjusting the axis
+    if lineprof == True:
+        plt.subplot(211)
+        plt.xscale('linear')
+        plt.yscale('linear')
+        plt.xlabel("$\Delta v\,[\mathrm{km/s}]$")
+        plt.ylabel("$f_\lambda/f^c_\lambda$")
+        plt.xlim([-600.,600.])
+    else:
+        plt.subplot(311)
+        plt.xscale('log')
+        plt.yscale('log')
+        plt.xlabel("$\lambda\,[\mathrm{\mu m}]$")
+        plt.ylabel("$\lambda f_\lambda$")
+        plt.xlim(xlim_now)
+        #plt.ylim([0.0001,0.005])
+        plt.subplot(613)
+        plt.xscale('log')
+        plt.xlabel("$\lambda\,[\mathrm{\mu m}]$")
+        plt.ylabel("$\\alpha$")
+        plt.xlim(xlim_now)
+        plt.ylim([-5.,5.])
+        plt.subplot(614)
+        plt.xscale('log')
+        plt.xlabel("$\lambda\,[\mathrm{\mu m}]$")
+        plt.ylabel("$\\frac{\\mathrm{d}\lambda f_\lambda}{\\mathrm{d}\lambda}$")
+        plt.xlim(xlim_now)
+        plt.ylim([-3.,3.])
+    if lineprof == True:
+        plt.subplot(234)
+        plt.xscale('linear')
+        plt.yscale('linear')
+        plt.xlabel("#")
+        plt.ylabel("line flux [$\\times 10^{-10}\,\mathrm{erg\,s^{-1}\,cm^{-2}}$]")
+        plt.subplot(235)
+        plt.xscale('linear')
+        plt.yscale('linear')
+        plt.xlabel("#")
+        plt.ylabel("$EW\,[\AA]$")
+        plt.subplot(236)
+        plt.xscale('linear')
+        plt.yscale('linear')
+        plt.xlabel("#")
+        plt.ylabel("peak sep. $[\mathrm{km/s}]$")
+    else:
+        plt.subplot(313)
+        plt.xscale('log')
+        plt.yscale('linear')
+        plt.xlabel("$\lambda\,[\mathrm{\mu m}]$")
+        plt.ylabel("$P_\lambda$")
+        plt.xlim(xlim_now)
+
+    plt.show()
+
+
+
+
+
+
+
+
+
+
+### PLOTTING L BAND DIAGRAMS
+if 1==2:
+
+    
+    lineprof=True; hwidth=400.
+
+
+    lbc_Bralpha=4.052248
+    lbc_Pfgamma=3.740536
+    lbc_Humphrey14=4.020843
+    lbc_Humphrey19=3.645901
+    lbc_Humphreyoth=    [
+                        4.020843, ### Humphrey14
+                        3.907525, ### Humphrey15
+                        3.819428, ### Humphrey16
+                        #3.749370, ### Humphrey17
+                        3.692611, ### Humphrey18
+                        3.645901, ### Humphrey19
+                        #3.606946, ### Humphrey20
+                        3.574082, ### Humphrey21
+                        3.546079, ### Humphrey22
+                        3.522003, ### Humphrey23
+                        #3.501142, ### Humphrey24
+                        3.482938, ### Humphrey25
+                        3.466951, ### Humphrey26
+                        ]
+
+
+
+    plt.figure(25,figsize=(8, 12), dpi=100)
+
+    xL=[]
+    yL=[]
+    H14L=[]
+    BL=[]; lamb1_BL=3.41 ; lamb2_BL=3.47
+    RL=[]; lamb1_RL=3.93 ; lamb2_RL=4.00
+    ### Uncomment one of the following loops:
+    ### inu = index of cosi
+    ### icont = index of the model that was read
+
+    ### LOOP OVER SELECTED MODELS
+    inu=9
+    for icont in xrange(0,len(fullsed_contents)):
+        contents=fullsed_contents[icont]
+        ii=icont
+    ###
+
+    ### LOOP OVER INCLINATIONS
+    #icont=5
+    #contents=fullsed_contents[icont]
+    #for inu in xrange(0,len(contents[1])):
+    #    ii=inu
+    ###
+
+        plt.subplot(211)
+        xlp=contents[2][inu,:,0]
+        ylp=contents[2][inu,:,1]
+
+
+        linfluxes=[]
+        wvlengths=[]
+        lbc=lbc_Humphrey19
+        xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+        vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5
+        idx = np.where(np.abs(vels) <= hwidth)
+        linflux19=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+        linflux19=linflux19 * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+        for ilbc in xrange(0,len(lbc_Humphreyoth)):
+            lbc=lbc_Humphreyoth[ilbc]
+            wvlengths.append(lbc)
+            xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+            vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5
+            idx = np.where(np.abs(vels) <= hwidth)
+            linflux=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+            linflux=linflux * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+            linfluxes.append(linflux/linflux19)
+        plt.plot(wvlengths, linfluxes, color=colorvec[ii])
+        
+        #plt.subplot(212)
+
+
+
+        Nnpts=50
+        llamb=np.array([lamb1_BL+(lamb2_BL-lamb1_BL)/\
+            float(Nnpts-1)*float(i) for i in range(0,Nnpts)])
+        dllamb=np.array([llamb[i+1]-llamb[i] for i in range(0,Nnpts-1)])
+        ylpf=np.array([lrr.interpLinND([llamb[i]],[xlp],ylp) \
+            for i in range(0,Nnpts)])
+        BLflux=lrr.integrate_trapezia(ylpf,dllamb)
+        BLflux=BLflux * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.
+        print(BLflux)
+        llamb=np.array([lamb1_RL+(lamb2_RL-lamb1_RL)/\
+            float(Nnpts-1)*float(i) for i in range(0,Nnpts)])
+        dllamb=np.array([llamb[i+1]-llamb[i] for i in range(0,Nnpts-1)])
+        ylpf=np.array([lrr.interpLinND([llamb[i]],[xlp],ylp) \
+            for i in range(0,Nnpts)])
+        RLflux=lrr.integrate_trapezia(ylpf,dllamb)
+        RLflux=RLflux * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.
+        print(RLflux)
+
+        lbc=lbc_Humphrey14
+        xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+        vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5
+        idx = np.where(np.abs(vels) <= hwidth)
+        linflux14=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+        linflux14=linflux14 * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+        print(linflux14)
+        #print(ii,np.nanmin(yplot),np.nanmax(yplot))
+
+        lbc=lbc_Pfgamma
+        xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+        vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5
+        idx = np.where(np.abs(vels) <= hwidth)
+        linfluxPfg=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+        linfluxPfg=linfluxPfg * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+        
+        lbc=lbc_Bralpha
+        xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+        vels = (xlp - lbc) / lbc * phc.c.cgs * 1e-5
+        idx = np.where(np.abs(vels) <= hwidth)
+        linfluxBra=spt.absLineCalc(xplot, ylp[idx], vw=hwidth)
+        linfluxBra=linfluxBra * contents[4][3]*phc.Lsun.cgs/4./np.pi/\
+                        (dist_std*phc.pc.cgs)**2.*1e5*lbc/phc.c.cgs
+        
+        xL.append(lrr.scale_two_arcsinh(linflux14/linfluxPfg,\
+            1.,100.,0.2,100.))
+        yL.append(lrr.scale_two_arcsinh(linflux14/linfluxBra,\
+            1.,100.,0.2,100.))
+        H14L.append(linflux14)
+        BL.append(BLflux)
+        RL.append(RLflux)
+        axisvals=np.array([5.,2.,1.,0.5,0.2,0.1,0.05,0.02,0.01,0.,\
+                            -0.1,-1.,-10.,-100.])
+        transf_axisvals=np.array([lrr.scale_two_arcsinh(axisvals[i],\
+            1.,100.,0.2,100.) for i in xrange(0,len(axisvals))])
+    
+    plt.subplot(212)
+    plt.plot([0.,0.],[-1e32,1e32],linestyle=":",color="black",\
+        linewidth=0.6)
+    plt.plot([-1e32,1e32],[0.,0.],linestyle=":",color="black",\
+        linewidth=0.6)
+    plt.plot([lrr.scale_two_arcsinh(10.**-0.1,\
+            1.,100.,0.2,100.),lrr.scale_two_arcsinh(10.**-0.1,\
+            1.,100.,0.2,100.)],\
+                [lrr.scale_two_arcsinh(10.**-0.2,\
+            1.,100.,0.2,100.),1e32],linestyle=":",color="blue",\
+        linewidth=0.5)
+    plt.plot([lrr.scale_two_arcsinh(10.**-0.1,\
+            1.,100.,0.2,100.),1e32],[lrr.scale_two_arcsinh(10.**-0.2,\
+            1.,100.,0.2,100.),lrr.scale_two_arcsinh(10.**-0.2,\
+            1.,100.,0.2,100.)],linestyle=":",color="blue",\
+        linewidth=0.5)
+    plt.plot(xL,yL,linewidth=0.3)
+    for i in xrange(0,len(xL)):
+        if H14L[i] >= 0.:
+            markk="o"
+        else:
+            markk="^"
+        plt.scatter([xL[i]],[yL[i]],marker=markk,\
+            s=1e4*np.abs(H14L[i]/BL[i]),\
+            color=colorvec[i],facecolors="none")
+        #print(i,[xL[i]],[yL[i]],colorvec[i])
+        
+
+    ### Adjusting the axis
+    plt.subplot(211)        
+    plt.xscale('linear')
+    plt.yscale('linear')
+    plt.xlabel("$\lambda \,[\mathrm{\mu m}]$")
+    plt.ylabel("$F(\mathrm{H}_n)/F(\mathrm{H}_{19})$")
+    plt.ylim([0.,3.])
+    plt.subplot(212)        
+    plt.xscale('linear')
+    plt.yscale('linear')
+    plt.xlabel("$F(\mathrm{H}_{14})/F(\mathrm{Pf}_{\gamma})$")
+    plt.ylabel("$F(\mathrm{H}_{14})/F(\mathrm{Br}_{\\alpha})$")
+    plt.xticks(transf_axisvals,axisvals)
+    plt.yticks(transf_axisvals,axisvals)
+    plt.xlim([lrr.scale_two_arcsinh(-80.,\
+            1.,100.,0.2,100.),lrr.scale_two_arcsinh(8.,\
+            1.,100.,0.2,100.)])
+    plt.ylim([lrr.scale_two_arcsinh(-80.,\
+            1.,100.,0.2,100.),lrr.scale_two_arcsinh(8.,\
+            1.,100.,0.2,100.)])
+    
+    plt.show()
+
+
+
+
+
+
+
+
+
+
+
+### PLOTTING TEMPERATURES
+
+### TODO: 
+### plot equatorial temperature (black dotted)
+### plot polar temperature (black dotted)
+### plot effective temperature (red dotted)
+### plot 0.6 * effective temperature (red dotted)
+### plot 0.72 * polar temperature (blue dotted)
+### plot 0.5**-0.25 * effective temperature (red dot)
+if 1==1:
+
+
+    plt.figure(2,figsize=(7, 6), dpi=100)
+
+    ### LOOP OVER SELECTED MODELS
+    for icont in xrange(0,len(fullsed_contents)):
+        contents=fullsed_contents[icont]
+
+        ii=icont
+
+        xplot=contents[6][0,:]
+        yplot=contents[6][1,:]
+        plt.plot(xplot, yplot, \
+            color=colorvec[ii], linestyle=linestylevec[ii])
+            
+        obnow,omeganow,gammanow,Wnow = rss.rocheparams(contents[4][2],"W")
+        A0now,Psi0now,Omega0now,g0now,F0now,T0now,L0now = \
+            rss.f_ctes1(contents[4][1],contents[4][0],contents[4][3],"lum")
+        Tmean4_qu_v2 = rss.Tmean4_qu_v2(omeganow,1.,1.)
+        Teff = Tmean4_qu_v2*T0now
+        print("Teff",Teff)
+        print("")
+        Tplot=Teff*np.array([1. for elem in contents[6][0,:]])
+        #plt.plot(xplot, Tplot, color="red", linestyle=":")
+        plt.plot(xplot, 0.6*Tplot, color="red", linestyle=":")
+        #plt.scatter([1.], (1./2.)**0.25*Tplot[0], color="red")
+
+    ### Adjusting the axis
+    plt.xscale('log')
+    #plt.yscale('log')
+    plt.xlabel("$R/R_\mathrm{eq}$")
+    plt.ylabel("$T\,[\mathrm{K}]$")
+    #plt.xlim(xlim_now)
+
+    plt.show()
+
+
+
+
+
+
+
+
+################################
+
+
+if False:
+
+###    filters=[   'STMAG','white',\
+###            'bess-u','bess-b','bess-v','bess-r','bess-i',\
+###            'bess-j','bess-h','bess-k','bess-l','bess-ll','bess-m',\
+###            'int_wfc-hbetan','int_wfc-hbetaw',\
+###            'int_wfc-halpha'
+###            ]
+    filters=[   'STMAG','white',\
+            'bess-v','bess-i',\
+            'bess-j','bess-h','bess-k'
+            ]
+    filters=[   'STMAG','bess-u','bess-v','bess-r','int_wfc-halpha']
+
+            
+    filterplot=['bess-v','bess-i','bess-k']
+    filterplot=['bess-u','bess-v','bess-r','int_wfc-halpha']
+    npts_interp_vec=[50]
+
+
+
+#############
+
+    npts_interp=npts_interp_vec[0]
+    
+    print("Obtaining zero point constants...")
+    zp=[]
+    for j in xrange(0,len(filters)):
+        zp.append(lrr.obtain_pogson_zp('spct1',filters[j],\
+                    npts=npts_interp))
+    print("")
+
+
+    all_photflux=[]
+    all_Mag=[]
+    for ifile in xrange(0,len(files_fullsed_new)):
+        fullsedtest=files_fullsed_new[ifile]
+        sourcetest=files_source_new[ifile]
+
+
+        photflux_vec=[]
+        for j in xrange(0,len(filters)):
+            print("Obtaining photon fluxes for filter "+str(filters[j]))
+            mu,lamb,flambda,photflux=lrr.fullsed2photonflux(fullsedtest,\
+                sourcetest,filters[j],npts=npts_interp,dist=10.)
+            photflux_vec.append(photflux)
+        all_photflux.append(photflux_vec)
+
+        Mag_vec=[]
+        for j in xrange(0,len(filters)):
+            Mag_vec.append(lrr.pogson(photflux_vec[j],zp[j]))
+        all_Mag.append(Mag_vec)
+
+
+    all_DeltaMag=[]
+    for ifile in xrange(0,len(all_Mag)):
+        auxii=[]
+        for j in xrange(0,len(all_Mag[ifile])):
+            auxij=[]
+            for k in xrange(0,len(all_Mag[ifile][j])):
+                ### Assuming ifile=0 is the photospheric
+                auxij.append(all_Mag[ifile][j][k]-all_Mag[0][j][k])
+            auxii.append(auxij)
+        all_DeltaMag.append(auxii)
+
+
+
+
+    all_polarization=[]
+    for ifile in xrange(0,len(all_Mag)):
+        contents=fullsed_contents[ifile]
+        auxiifile=[]
+        for iobs in xrange(0,len(mu)):
+            lbd=contents[2][iobs, :, 0]*1e4
+            polflx=contents[2][iobs, :, 2]
+            lbdn=[]
+            polflxn=[]
+            for ilbd in xrange(0,len(lbd)):
+                if (not np.isnan(lbd[ilbd])) and \
+                        (not np.isnan(polflx[ilbd])):
+                    lbdn.append(lbd[ilbd])
+                    polflxn.append(polflx[ilbd])
+            lbdn=np.array(lbdn)
+            polflxn=np.array(polflxn)
+                    
+            
+            auxiifile.append(hdt.doFilterConv(lbdn, polflxn, 'V',\
+                zeropt=True)*100)
+        all_polarization.append(np.array(auxiifile))
+            
+    all_vsini=[]
+    for ifile in xrange(0,len(all_Mag)):
+        contents=fullsed_contents[ifile]
+        auxiifile=[]
+        stelpars=[elem for elem in contents[4]]
+        rpolenow=stelpars[1]
+        massnow=stelpars[0]
+        Wnow=stelpars[2]
+        lixo,omeganow,lixo,Wnow=rss.rocheparams(Wnow,"W")
+        veqfile=rss.cte_veq(rpolenow,massnow,omeganow,1.0)
+        
+        for iobs in xrange(0,len(mu)):
+            auxiifile.append(veqfile*(1.-mu[iobs]**2.)**0.5)
+        all_vsini.append(np.array(auxiifile))
+
+        
+        
+
+
+    if 1==2:
+    
+        ylim_now=[-1.0e15,1.5e15]
+        for ifilt in xrange(0,len(filterplot)):
+            jnow=np.nan
+            for j in xrange(0,len(all_Mag[ifile])):
+                if filterplot[ifilt] == filters[j]:
+                    jnow=j
+            if not np.isnan(jnow):
+                plt.figure(3,figsize=(7, 6), dpi=100)
+    
+                ### LOOP OVER SELECTED MODELS
+                for ifile in xrange(0,len(all_DeltaMag)):
+
+                    xplot=mu
+                    yplot=all_DeltaMag[ifile][jnow]
+                    plt.scatter(xplot, yplot, \
+                        color=colorvec[ifile], marker='*')
+                    
+                    maxnow=np.nanmax(yplot)
+                    minnow=np.nanmin(yplot)
+                    if ylim_now[0] < maxnow:
+                        ylim_now[0]=maxnow
+                    if ylim_now[1] > minnow:
+                        ylim_now[1]=minnow
+
+                ### Adjusting the axis
+                plt.title(filterplot[ifilt])
+                plt.xlabel("$\\cos i$")
+                plt.ylabel("$\\Delta X\,[\mathrm{mag}]$")
+                #plt.xlim(xlim_now)
+                plt.ylim([  ylim_now[0]+0.1*(ylim_now[0]-ylim_now[1]),\
+                            ylim_now[1]-0.1*(ylim_now[0]-ylim_now[1])])
+        
+                plt.show()
+
+
+
+
+
+
+
+
+    if 1==2 and 'int_wfc-halpha' in filters and 'bess-r' in filters:
+    
+        ylim_now=[-1.0e15,1.5e15]
+        jnow1=np.nan; jnow2=np.nan
+        for j in xrange(0,len(all_Mag[ifile])):
+            if 'int_wfc-halpha' == filters[j]:
+                jnow1=j
+            if 'bess-r' == filters[j]:
+                jnow2=j
+        if (not np.isnan(jnow1)) and (not np.isnan(jnow2)):
+            plt.figure(3,figsize=(7, 6), dpi=100)
+            print("CHEGUEI AQUI!")
+
+            ### LOOP OVER SELECTED MODELS
+            for ifile in xrange(0,len(all_DeltaMag)):
+
+                xplot=mu
+                yplot=np.array([all_DeltaMag[ifile][jnow1][iii]-\
+                        all_DeltaMag[ifile][jnow2][iii] \
+                        for iii in xrange(0,len(mu))] )
+                plt.scatter(xplot, yplot, \
+                    color=colorvec[ifile], marker='*')
+                    
+                maxnow=np.nanmax(yplot)
+                minnow=np.nanmin(yplot)
+                if ylim_now[0] < maxnow:
+                    ylim_now[0]=maxnow
+                if ylim_now[1] > minnow:
+                    ylim_now[1]=minnow
+
+            ### Adjusting the axis
+            #plt.title(filterplot[ifilt])
+            plt.xlabel("$\\cos i$")
+            plt.ylabel("$\\Delta (H\\alpha - R)\,[\mathrm{mag}]$")
+            #plt.xlim(xlim_now)
+            plt.ylim([  ylim_now[0]+0.1*(ylim_now[0]-ylim_now[1]),\
+                        ylim_now[1]-0.1*(ylim_now[0]-ylim_now[1])])
+    
+            plt.show()
+
+
+
+
+
+
+
+
+    if 1==1:
+
+        filterplot=['bess-v']
+        lineprof=True; hwidth=1000.
+        lbc=0.656461; xlim_now=(lbc-0.0010,lbc+0.0010) ### Halpha
+
+        ylim_now1=[-1.0e15,1.5e15]
+        for ifilt in xrange(0,len(filterplot)):
+            jnow=np.nan
+            for j in xrange(0,len(all_Mag[ifile])):
+                if filterplot[ifilt] == filters[j]:
+                    jnow=j
+            if not np.isnan(jnow):
+                plt.figure(4,figsize=(8, 12), dpi=100)
+
+                plt.subplot(321)
+                ### LOOP OVER SELECTED MODELS
+                for ifile in xrange(0,len(all_DeltaMag)):
+
+                    xplot=mu
+                    yplot=all_DeltaMag[ifile][jnow]
+                    plt.scatter(xplot, yplot, \
+                        color=colorvec[ifile], marker='*')
+                    
+                    maxnow=np.nanmax(yplot)
+                    minnow=np.nanmin(yplot)
+                    if ylim_now1[0] < maxnow:
+                        ylim_now1[0]=maxnow
+                    if ylim_now1[1] > minnow:
+                        ylim_now1[1]=minnow
+
+                ### Adjusting the axis
+                plt.title(filterplot[ifilt])
+                plt.xlabel("$\\cos i$")
+                plt.ylabel("$\\Delta X\,[\mathrm{mag}]$")
+                #plt.xlim(xlim_now)
+                plt.ylim([  ylim_now1[0]+0.1*(ylim_now1[0]-ylim_now1[1]),\
+                            ylim_now1[1]-0.1*(ylim_now1[0]-ylim_now1[1])])
+
+
+                plt.subplot(322)
+                ### LOOP OVER SELECTED MODELS
+                for ifile in xrange(0,len(all_polarization)):
+
+                    xplot=mu
+                    yplot=all_polarization[ifile]
+                    plt.scatter(xplot, yplot, \
+                        color=colorvec[ifile], marker='*')
+
+                ### Adjusting the axis
+                plt.xlabel("$\\cos i$")
+                plt.ylabel("$P_V\,[\%]$")
+
+
+                ### LOOP OVER SELECTED MODELS
+                for icont in xrange(0,len(fullsed_contents)):
+                    contents=fullsed_contents[icont]
+                    for inu in xrange(0,len(contents[1])):
+
+                        if lineprof == True:
+                            xlp=contents[2][inu,:,0]
+                            ylp=contents[2][inu,:,1]
+                            xplot,yplot=spt.lineProf(xlp, ylp, lbc, hwidth=hwidth)
+        
+                        if lineprof == True:
+                            plt.subplot(323)
+                            ew=spt.EWcalc(xplot, yplot, vw=hwidth)
+                            xplotn=[mu[inu]]
+                            yplotn=[ew]
+                            plt.scatter(xplotn, yplotn, color=colorvec[icont], marker='*')
+            
+                            plt.subplot(324)
+                            v1,v2=spt.PScalc(xplot, yplot, vc=0.0, ssize=0.05, gaussfit=True)
+                            xplotn=[mu[inu]]
+                            yplotn=[v2-v1]
+                            plt.scatter(xplotn, yplotn, color=colorvec[icont], marker='*')
+
+                ### Adjusting the axis
+                if lineprof == True:
+                    plt.subplot(323)
+                    plt.xscale('linear')
+                    plt.yscale('linear')
+                    plt.xlabel("$\cos i$")
+                    plt.ylabel("$EW\,[\mathrm{km/s}]$")
+                    plt.subplot(324)
+                    plt.xscale('linear')
+                    plt.yscale('linear')
+                    plt.xlabel("$\cos i$")
+                    plt.ylabel("peak sep. $[\mathrm{km/s}]$")
+
+
+                plt.subplot(325)
+                ### LOOP OVER SELECTED MODELS
+                for ifile in xrange(0,len(all_vsini)):
+
+                    xplot=mu
+                    yplot=all_vsini[ifile]
+                    plt.scatter(xplot, yplot, \
+                        color=colorvec[ifile], marker='*')
+
+                ### Adjusting the axis
+                plt.xlabel("$\\cos i$")
+                plt.ylabel("$v\sin i\,[\mathrm{km/s}]$")
+
+
+
+
+
+                plt.show()
+
+
+
+
+
+

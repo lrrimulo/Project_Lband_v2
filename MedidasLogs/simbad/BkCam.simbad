@@ -1,0 +1,26 @@
+HD 20336 -- Be Star
+Origin of the objects types :
+(Ref) Object type as listed in the reference "Ref"
+(acronym) Object type linked to the acronym according to the original reference
+() Anterior to 2007, before we can link the objet type to a reference, or given by the CDS team in some particular cases
+
+Other object types:	* (HD,AG,...), ** (**,CCDM,...), V* (CSV,V*,...), Em* (EM*,[KW97]), IR (IRAS,2MASS), Be* (Ref), UV (TD1)
+ICRS coord. (ep=J2000) :	03 19 59.2722182726 +65 39 08.251851271 (Optical) [ 0.2320 0.2770 90 ] A 2018yCat.1345....0G
+FK4 coord. (ep=B1950 eq=1950) :	03 15 33.7446219717 +65 28 17.547858195 [ 0.2320 0.2770 90 ]
+Gal coord. (ep=J2000) :	137.4569925576989 +07.0609759967417 [ 0.2320 0.2770 90 ]
+Proper motions mas/yr :	10.506 -14.677 [0.435 0.519 90] A 2018yCat.1345....0G
+Radial velocity / Redshift / cz :	V(km/s) -3.40 [3.5] / z(~) -0.000011 [0.000012] / cz -3.40 [3.50] 
+   C 2006AstL...32..759G
+Parallaxes (mas):	6.0704 [0.3539] A 2018yCat.1345....0G
+Spectral type:	B2.5Vn(e) C 1968ApJS...17..371L
+Fluxes (9) :	
+U 3.93 [~] C 2002yCat.2237....0D
+B 4.70 [~] C 2002yCat.2237....0D
+V 4.85 [~] C 2002yCat.2237....0D
+R 4.88 [~] C 2002yCat.2237....0D
+I 5.01 [~] C 2002yCat.2237....0D
+G 4.6192 [0.0024] C 2018yCat.1345....0G
+J 5.048 [0.020] C 2003yCat.2246....0C
+H 5.074 [0.026] C 2003yCat.2246....0C
+K 5.048 [0.024] C 2003yCat.2246....0C
+

@@ -1,0 +1,18 @@
+HD 11606 -- Be Star
+Other object types:	* (HD,AG,...), IR (IRAS,2MASS,...), Em* (EM*,[KW97]), UV (CEL,TD1), Be* (Ref), V* (V*)
+ICRS coord. (ep=J2000) :	01 55 42.8536085670 +59 16 24.420680595 (Optical) [ 0.0310 0.0386 90 ] A 2018yCat.1345....0G
+FK4 coord. (ep=B1950 eq=1950) :	01 52 15.7247351749 +59 01 43.939715666 [ 0.0310 0.0386 90 ]
+Gal coord. (ep=J2000) :	131.0706207624957 -02.5788334587945 [ 0.0310 0.0386 90 ]
+Proper motions mas/yr :	0.949 -1.675 [0.085 0.098 90] A 2018yCat.1345....0G
+Radial velocity / Redshift / cz :	V(km/s) 12.5 [2] / z(~) 0.000042 [0.000007] / cz 12.50 [2.00] 
+   E 1953GCRV..C......0W
+Parallaxes (mas):	1.6792 [0.0523] A 2018yCat.1345....0G
+Spectral type:	B2Vne C ~
+Fluxes (7) :	
+U 6.22 [~] D 1982IAUS...98..261J
+B 7.08 [~] E ~
+V 7.02 [~] E ~
+G 6.9865 [0.0015] C 2018yCat.1345....0G
+J 6.457 [0.020] C 2003yCat.2246....0C
+H 6.33 [0.05] C 2003yCat.2246....0C
+K 6.139 [0.029] C 2003yCat.2246....0C

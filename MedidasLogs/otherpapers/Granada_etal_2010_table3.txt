@@ -1,0 +1,41 @@
+### This is the third table of Granada et al. 2010AJ....139.1983G
+###
+### Columns 0, 1: indexes of transtion
+### Column 2: lambda [microns]
+### Column 3: flux (BK Cam) [10E-13 erg/cm2 s] (err = 10%)
+### Column 4: flux (28 Tau) [10E-13 erg/cm2 s] (err = 10%)
+### Column 5: flux (88 Her) [10E-13 erg/cm2 s] (err = 10%)
+### Column 6: flux (66 Oph) [10E-13 erg/cm2 s] (err = 10%)
+### Column 7: flux (V923 Aql) [10E-13 erg/cm2 s] (err = 10%)
+### Column 8: flux (28 Cyg) [10E-13 erg/cm2 s] (err = 10%)
+### Column 9: flux (EW Lac 2006) [10E-13 erg/cm2 s] (err = 10%)
+### Column 10: flux (EW Lac 2008) [10E-13 erg/cm2 s] (err = 10%)
+### 
+5 4    4.052	12.01	7.01	0.6	19.6	10.22	13.1	2.97	34
+14 6    4.021	8.16	0.7	0.44	None	0.83	1.1	0.56	5.51
+15 6    3.908	7.99	0.59	None	None	None	1.22	0.84	5.58
+16 6    3.82	8.03	0.52	None	None	None	0.72	1.02	5.98
+17 6    3.75	7.41	None	None	None	None	None	None	6.27
+8 5    3.741	11.1	4.21	0.88	4.44	3.43	6.19	1.83	15.2
+18 6    3.693	7.5	0.44	None	None	None	None	0.47	5.23
+19 6    3.646	6.88	0.39	None	None	None	None	0.66	4.43
+20 6    3.607	6.35	None	None	None	None	None	0.82	3.03
+21 6    3.574	5.87	None	None	None	None	None	0.59	3.13
+22 6    3.546	4.35	None	None	None	None	None	0.87	3.16
+23 6    3.522	3.68	None	None	None	None	None	0.69	2.7
+24 6    3.501	2.23	None	None	None	None	None	0.35	2.75
+25 6    3.483	1.17	None	None	None	None	None	None	2.24
+9 5    3.297	None	None	None	None	None	None	None	41.2
+10 5    3.04	16.87	3.45	None	None	None	None	1.92	32.4
+17 5    2.495	14.27	None	None	None	None	None	None	32.4
+18 5    2.47	13.39	None	None	None	None	None	None	7.05
+19 5    2.449	8.61	None	None	None	None	None	None	6.8
+20 5    2.431	8.56	None	None	None	None	None	None	5.6
+21 5    2.416	7.43	None	None	None	None	None	None	4.07
+22 5    2.404	6	None	None	None	None	None	5.6	4.13
+23 5    2.393	3.92	None	None	None	None	None	5.41	4.06
+24 5    2.383	3.15	None	None	None	None	None	4.72	2.11
+25 5    2.373	2.39	None	None	None	None	None	2.61	2.28
+27 5    2.359	1.43	None	None	None	None	None	None	None
+7 4    2.166	26.26	13.05	3.91	2.12	8.87	10.4	18.6	23.3
+8 4    1.94	38.49	19.16	None	None	None	None	None	33.9

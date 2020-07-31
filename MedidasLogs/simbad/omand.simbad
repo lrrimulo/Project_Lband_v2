@@ -1,0 +1,20 @@
+* omi And -- Be Star
+Other object types:	bL* (), * (*,AG,...), ** (**,CCDM,...), V* (V*,AAVSO), IR (IRAS,2MASS), UV (CEL,TD1), SB* (SBC9), *iN (VDB), Be* (Ref), Em* (EM*)
+ICRS coord. (ep=J2000) :	23 01 55.2645930 +42 19 33.533383 (Optical) [ 0.24 0.29 90 ] A 2007A&A...474..653V
+FK4 coord. (ep=B1950 eq=1950) :	22 59 36.8670314 +42 03 24.700090 [ 0.24 0.29 90 ]
+Gal coord. (ep=J2000) :	102.2076023411 -16.0960751507 [ 0.24 0.29 90 ]
+Proper motions mas/yr :	22.99 0.88 [0.28 0.34 90] A 2007A&A...474..653V
+Radial velocity / Redshift / cz :	V(km/s) -14.00 [0.5] / z(~) -0.000047 [0.000002] / cz -14.00 [0.50] 
+   A 1993BICDS..43....5T
+Parallaxes (mas):	4.75 [0.53] A 2007A&A...474..653V
+Spectral type:	B6IV/V_sh D 1966ApJ...145..121S
+Fluxes (9) :	
+U 3.00 [~] C 2002yCat.2237....0D
+B 3.53 [~] C 2002yCat.2237....0D
+V 3.62 [~] C 2002yCat.2237....0D
+R 3.61 [~] C 2002yCat.2237....0D
+I 3.69 [~] C 2002yCat.2237....0D
+G 11.9478 [0.7893] C 2018yCat.1345....0G
+J 3.827 [0.288] D 2003yCat.2246....0C
+H 3.81 [~] C 2002yCat.2237....0D
+K 3.85 [~] C 2002yCat.2237....0D

@@ -1,0 +1,18 @@
+* b02 Cyg -- Be Star
+Other object types:	* (*,AG,...), IR (IRAS,2MASS,...), Em* (EM*,[KW97]), V* (V*,AAVSO), UV (CEL,TD1), Be* (Ref)
+ICRS coord. (ep=J2000) :	20 09 25.6190867940 +36 50 22.596147551 (Optical) [ 0.1751 0.2360 90 ] A 2018yCat.1345....0G
+FK4 coord. (ep=B1950 eq=1950) :	20 07 34.1000856766 +36 41 28.902010185 [ 0.1751 0.2360 90 ]
+Gal coord. (ep=J2000) :	073.9148363898587 +02.0440556918031 [ 0.1751 0.2360 90 ]
+Proper motions mas/yr :	2.728 15.562 [0.375 0.477 90] A 2018yCat.1345....0G
+Radial velocity / Redshift / cz :	V(km/s) -13.6 [0.9] / z(~) -0.000045 [0.000003] / cz -13.60 [0.90] 
+   E 1953GCRV..C......0W
+Parallaxes (mas):	5.2947 [0.2255] A 2018yCat.1345....0G
+Spectral type:	B2.5Ve C ~
+Fluxes (7) :	
+U 4.03 [~] C 2002yCat.2237....0D
+B 4.80 [~] C 2002yCat.2237....0D
+V 4.93 [~] C 2002yCat.2237....0D
+G 4.8880 [0.0026] C 2018yCat.1345....0G
+J 5.071 [0.037] C 2003yCat.2246....0C
+H 5.155 [0.016] C 2003yCat.2246....0C
+K 5.038 [0.021] C 2003yCat.2246....0C

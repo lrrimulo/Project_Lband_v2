@@ -1,0 +1,12 @@
+# Files containing the following are ignored by Git.
+*.[oa]
+*~
+*.png
+*.pyc
+*.out
+*.inp
+
+documents/*
+OldBeAtlas/*
+results/*
+

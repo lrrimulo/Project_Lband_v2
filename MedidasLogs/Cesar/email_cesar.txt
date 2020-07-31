@@ -1,0 +1,19 @@
+ Saludos Leandro, estos son los nombres de cada columna:
+
+
+Center   Continuo   Flux   EquivalentWidth   Core   gaussianFWHM   LorentzianFWHM
+
+
+Note que para la última columna el valor siempre es cero en todos los datos. Como la medición se realizó tres veces el número de filas es un múltiplo de tres. Para V777 solo se cuenta con la información de: Center   Flux   Core   gaussianFWHM.
+
+También le envío nuevamente el conjunto de datos en el archivo adjunto DatosBeStarsL.zip.
+
+
+Si tiene alguna duda por favor escríbame.
+
+
+Atentamente
+
+Cesar Millan 
+
+
